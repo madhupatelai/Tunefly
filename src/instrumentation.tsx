@@ -36,17 +36,23 @@ async function reportErrorToVly(errorData: {
   lineno?: number;
   colno?: number;
 }) {
-  if (!import.meta.env.VITE_VLY_APP_ID) {
+  const appId = import.meta.env.VITE_VLY_APP_ID;
+  const monitoringUrl = import.meta.env.VITE_VLY_MONITORING_URL;
+
+  if (!appId || !monitoringUrl) {
     return;
   }
 
   try {
-    await fetch(import.meta.env.VITE_VLY_MONITORING_URL, {
+    await fetch(monitoringUrl, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         ...errorData,
         url: window.location.href,
-        projectSemanticIdentifier: import.meta.env.VITE_VLY_APP_ID,
+        projectSemanticIdentifier: appId,
       }),
     });
   } catch (error) {
@@ -61,40 +67,72 @@ function ErrorDialog({
   error: GenericError;
   setError: (error: GenericError | null) => void;
 }) {
+  const errorText =
+    error.stack || error.error || "Unknown runtime error";
+
   return (
     <Dialog
-      defaultOpen={true}
-      onOpenChange={() => {
-        setError(null);
+      open={true}
+      onOpenChange={(open) => {
+        if (!open) {
+          setError(null);
+        }
       }}
     >
       <DialogContent className="bg-red-700 text-white max-w-4xl">
         <DialogHeader>
           <DialogTitle>Runtime Error</DialogTitle>
         </DialogHeader>
-        A runtime error occurred. Open the vly editor to automatically debug the
-        error.
+
+        <div>
+          A runtime error occurred. Open the Vly editor to automatically
+          debug the error.
+        </div>
+
         <div className="mt-4">
           <Collapsible>
-            <CollapsibleTrigger>
+            <CollapsibleTrigger asChild>
               <div className="flex items-center font-bold cursor-pointer">
-                See error details <ChevronDown />
+                See error details
+                <ChevronDown className="ml-1" />
               </div>
             </CollapsibleTrigger>
+
             <CollapsibleContent className="max-w-[460px]">
               <div className="mt-2 p-3 bg-neutral-800 rounded text-white text-sm overflow-x-auto max-h-60 max-w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                <pre className="whitespace-pre">{error.stack}</pre>
+                <pre className="whitespace-pre-wrap break-words">
+                  {errorText}
+                </pre>
+
+                {"filename" in error && error.filename && (
+                  <div className="mt-3 border-t border-neutral-600 pt-2">
+                    <div>
+                      <strong>File:</strong> {error.filename}
+                    </div>
+
+                    <div>
+                      <strong>Line:</strong> {error.lineno}
+                    </div>
+
+                    <div>
+                      <strong>Column:</strong> {error.colno}
+                    </div>
+                  </div>
+                )}
               </div>
             </CollapsibleContent>
           </Collapsible>
         </div>
+
         <DialogFooter>
           <a
             href={`https://vly.ai/project/${import.meta.env.VITE_VLY_APP_ID}`}
             target="_blank"
+            rel="noopener noreferrer"
           >
             <Button>
-              <ExternalLink /> Open editor
+              <ExternalLink className="mr-2" />
+              Open editor
             </Button>
           </a>
         </DialogFooter>
@@ -116,49 +154,57 @@ class ErrorBoundary extends React.Component<
 > {
   constructor(props: { children: React.ReactNode }) {
     super(props);
-    this.state = { hasError: false, error: null };
+
+    this.state = {
+      hasError: false,
+      error: null,
+    };
   }
 
-  static getDerivedStateFromError() {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true };
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return {
+      hasError: true,
+      error: {
+        error: error.message || "Unknown runtime error",
+        stack: error.stack || "",
+      },
+    };
   }
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
-    // logErrorToMyService(
-    //   error,
-    //   // Example "componentStack":
-    //   //   in ComponentThatThrows (created by App)
-    //   //   in ErrorBoundary (created by App)
-    //   //   in div (created by App)
-    //   //   in App
-    //   info.componentStack,
-    //   // Warning: `captureOwnerStack` is not available in production.
-    //   React.captureOwnerStack(),
-    // );
+    const stack =
+      info.componentStack ||
+      error.stack ||
+      "";
+
+    console.error("React Runtime Error:", error);
+    console.error("Component Stack:", info.componentStack);
+
     reportErrorToVly({
-      error: error.message,
-      stackTrace: error.stack,
+      error: error.message || "Unknown runtime error",
+      stackTrace: stack,
     });
+
     this.setState({
       hasError: true,
       error: {
-        error: error.message,
-        stack: info.componentStack ?? error.stack ?? "",
+        error: error.message || "Unknown runtime error",
+        stack,
       },
     });
   }
 
   render() {
-    if (this.state.hasError) {
-      // You can render any custom fallback UI
+    if (this.state.hasError && this.state.error) {
       return (
         <ErrorDialog
-          error={{
-            error: "An error occurred",
-            stack: "",
+          error={this.state.error}
+          setError={() => {
+            this.setState({
+              hasError: false,
+              error: null,
+            });
           }}
-          setError={() => {}}
         />
       );
     }
@@ -177,62 +223,156 @@ export function InstrumentationProvider({
   useEffect(() => {
     const handleError = async (event: ErrorEvent) => {
       try {
-        console.log(event);
-        event.preventDefault();
-        setError({
-          error: event.message,
-          stack: event.error?.stack || "",
+        console.error("Global Runtime Error:", event);
+
+        /*
+         * Ignore resource loading errors.
+         *
+         * For example:
+         * <script>
+         * <img>
+         * <link>
+         *
+         * failed to load should NOT be treated as a
+         * JavaScript runtime error.
+         */
+        if (
+          event.target &&
+          event.target !== window &&
+          event.target instanceof Element
+        ) {
+          console.warn(
+            "Ignoring resource loading error:",
+            event.target
+          );
+          return;
+        }
+
+        const message =
+          event.message ||
+          event.error?.message ||
+          "Unknown runtime error";
+
+        const stack =
+          event.error?.stack ||
+          "";
+
+        const errorData: SyncError = {
+          error: message,
+          stack,
           filename: event.filename || "",
+          lineno: event.lineno || 0,
+          colno: event.colno || 0,
+        };
+
+        setError(errorData);
+
+        await reportErrorToVly({
+          error: message,
+          stackTrace: stack,
+          filename: event.filename,
           lineno: event.lineno,
           colno: event.colno,
         });
-
-        if (import.meta.env.VITE_VLY_APP_ID) {
-          await reportErrorToVly({
-            error: event.message,
-            stackTrace: event.error?.stack,
-            filename: event.filename,
-            lineno: event.lineno,
-            colno: event.colno,
-          });
-        }
       } catch (error) {
-        console.error("Error in handleError:", error);
+        console.error(
+          "Error in handleError:",
+          error
+        );
       }
     };
 
-    const handleRejection = async (event: PromiseRejectionEvent) => {
+    const handleRejection = async (
+      event: PromiseRejectionEvent
+    ) => {
       try {
-        console.error(event);
+        console.error(
+          "Unhandled Promise Rejection:",
+          event.reason
+        );
 
-        if (import.meta.env.VITE_VLY_APP_ID) {
-          await reportErrorToVly({
-            error: event.reason.message,
-            stackTrace: event.reason.stack,
-          });
+        let message = "Unhandled Promise Rejection";
+        let stack = "";
+
+        if (event.reason instanceof Error) {
+          message =
+            event.reason.message ||
+            message;
+
+          stack =
+            event.reason.stack ||
+            "";
+        } else if (
+          typeof event.reason === "string"
+        ) {
+          message = event.reason;
+        } else if (
+          event.reason &&
+          typeof event.reason === "object"
+        ) {
+          message =
+            event.reason.message ||
+            JSON.stringify(event.reason);
+
+          stack =
+            event.reason.stack ||
+            "";
         }
 
-        setError({
-          error: event.reason.message,
-          stack: event.reason.stack,
+        const errorData: AsyncError = {
+          error: message,
+          stack,
+        };
+
+        setError(errorData);
+
+        await reportErrorToVly({
+          error: message,
+          stackTrace: stack,
         });
       } catch (error) {
-        console.error("Error in handleRejection:", error);
+        console.error(
+          "Error in handleRejection:",
+          error
+        );
       }
     };
 
-    window.addEventListener("error", handleError);
-    window.addEventListener("unhandledrejection", handleRejection);
+    window.addEventListener(
+      "error",
+      handleError
+    );
+
+    window.addEventListener(
+      "unhandledrejection",
+      handleRejection
+    );
 
     return () => {
-      window.removeEventListener("error", handleError);
-      window.removeEventListener("unhandledrejection", handleRejection);
+      window.removeEventListener(
+        "error",
+        handleError
+      );
+
+      window.removeEventListener(
+        "unhandledrejection",
+        handleRejection
+      );
     };
   }, []);
+
   return (
     <>
-      <ErrorBoundary>{children}</ErrorBoundary>
-      {error && <ErrorDialog error={error} setError={setError} />}
+      <ErrorBoundary>
+        {children}
+      </ErrorBoundary>
+
+      {error && (
+        <ErrorDialog
+          error={error}
+          setError={setError}
+        />
+      )}
     </>
   );
 }
