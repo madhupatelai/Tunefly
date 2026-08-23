@@ -5,7 +5,7 @@
   "update_title": "New Update V4.9.8",
   "update_description": "⚡ Instant Playback & Video Player Fixes\n\n* Instant Music Playback: Songs now play instantly with zero delay when you tap them 🎵⚡\n* Look-Ahead Pre-buffering: Background caching prepares upcoming songs for smooth, gapless playback ⏩🎧\n* Fast First Song Launch: Top search results, album tracks, and playlist songs start playing immediately 🚀▶️\n* Video Progress Bar Fix: Progress bar and seek time are now always visible during video playback in Echo Player 📺⏳\n* Clean Video Screen: Removed top overlay bars (settings icon) for an uninterrupted video viewing experience 🎬✨\n* General stability improvements and faster performance ⚡🛠️",
   "download_url": "https://Mussifly.vercel.app",
-  "force_update": true,
+  "force_update": false,
   "promo": {
     "enabled": false,
     "title": "Must subscribe!",
