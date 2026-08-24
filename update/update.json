@@ -1,6 +1,6 @@
 {
-  "latest_version_code": 32,
-  "latest_version_name": "4.9.8",
+  "latest_version_code": 33,
+  "latest_version_name": "4.9.9",
   "is_direct_apk": false,
   
 
@@ -11,7 +11,7 @@
 
 
   "download_url": "https://Mussifly.vercel.app",
-  "force_update": false,
+  "force_update": true,
   "promo": {
     "enabled": false,
     "title": "Must subscribe!",
