@@ -2,8 +2,14 @@
   "latest_version_code": 32,
   "latest_version_name": "4.9.8",
   "is_direct_apk": false,
-  "update_title": "New Update V4.9.8",
-  "update_description": "⚡ Instant Playback & Video Player Fixes\n\n* Instant Music Playback: Songs now play instantly with zero delay when you tap them 🎵⚡\n* Look-Ahead Pre-buffering: Background caching prepares upcoming songs for smooth, gapless playback ⏩🎧\n* Fast First Song Launch: Top search results, album tracks, and playlist songs start playing immediately 🚀▶️\n* Video Progress Bar Fix: Progress bar and seek time are now always visible during video playback in Echo Player 📺⏳\n* Clean Video Screen: Removed top overlay bars (settings icon) for an uninterrupted video viewing experience 🎬✨\n* General stability improvements and faster performance ⚡🛠️",
+  
+
+  "update_title": "New Update V4.9.9",
+  "update_description": "⚡ Faster Playback & A Fresh New Experience\n\n* 🎵 Fixed Music Buffering: Improved buffering for smoother and more reliable music playback.\n* ⚡ Fixed Playback Delay: Songs now start playing faster with reduced waiting time.\n* 🍎 Apple Music-Inspired Player: Enjoy a cleaner and more modern music player experience.\n* 🎨 Redesigned All Players: Music and video players have been completely redesigned with a fresh new look.\n* 💧 Liquid Theme: Added a beautiful new Liquid-style design for dialogs and bottom sheets.\n* ✨ Redesigned Dialogs & Sheets: Cleaner layouts with smoother and more modern animations.\n* 🔋 Battery Optimization: Improved battery efficiency for longer usage and better performance.\n* 🚀 Performance Improvements: Overall speed, stability, and responsiveness have been improved.\n\n🎧 Enjoy the new V4.9.9 experience! 🔥",
+
+
+
+
   "download_url": "https://Mussifly.vercel.app",
   "force_update": false,
   "promo": {
