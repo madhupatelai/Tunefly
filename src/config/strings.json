@@ -1,11 +1,11 @@
 {
     "app": {
-        "name": "Mussifly V4.9.8",
+        "name": "Mussifly V4.9.9",
         "tagline": "Feel The Music, Beyond Limits."
     },
     "downloads": {
-        "arm64": "https://www.mediafire.com/file/oltobrjoulazm89/Mussiflyv4.9.8.apk/file",
-        "arm32": "https://www.mediafire.com/file/oltobrjoulazm89/Mussiflyv4.9.8.apk/file"
+        "arm64": "https://www.mediafire.com/file/hco8cejjlrdso69/Mussifly_V4.9.9.apk/file",
+        "arm32": "https://www.mediafire.com/file/hco8cejjlrdso69/Mussifly_V4.9.9.apk/file"
     },
     "stats": {
         "downloads": "5k+",
