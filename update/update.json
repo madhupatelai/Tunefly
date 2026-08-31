@@ -11,7 +11,7 @@
 
 
   "download_url": "https://Mussifly.vercel.app",
-  "force_update": true,
+  "force_update": false,
   "promo": {
     "enabled": false,
     "title": "Must subscribe!",
