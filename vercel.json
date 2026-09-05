@@ -5,6 +5,12 @@
   "installCommand": "npm install",
   "cleanUrls": true,
   "rewrites": [
+    { "source": "/song/(.*)", "destination": "/api/share?type=song&id=$1" },
+    { "source": "/artist/(.*)", "destination": "/api/share?type=artist&id=$1" },
+    { "source": "/album/(.*)", "destination": "/api/share?type=album&id=$1" },
+    { "source": "/playlist/(.*)", "destination": "/api/share?type=playlist&id=$1" },
+    { "source": "/online_playlist/(.*)", "destination": "/api/share?type=online_playlist&id=$1" },
+    { "source": "/profile/(.*)", "destination": "/api/share?type=profile&id=$1" },
     { "source": "/(.*)", "destination": "/" }
   ]
 }
