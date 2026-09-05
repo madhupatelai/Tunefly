@@ -1,6 +1,7 @@
 {
     "app": {
-        "name": "Mussifly V5.0.0",
+        "name": "Muzifly",
+        "fullName": "Muzifly (formerly Mussifly)",
         "tagline": "Feel The Music, Beyond Limits."
     },
     "downloads": {

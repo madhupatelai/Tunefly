@@ -88,6 +88,17 @@ export function Hero() {
             </div>
           </motion.div>
 
+          {/* Rebranding Notice Badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.15 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-white/70 mb-4 backdrop-blur-md"
+          >
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span>Formerly Mussifly • Same App, Fresh Identity</span>
+          </motion.div>
+
           {/* Title & Tagline with Adaptive Sizing */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

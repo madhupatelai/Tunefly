@@ -11,12 +11,16 @@ import strings from "@/config/strings.json";
 
 const faqs = [
   {
-    question: "Is Musifly free to use?",
-    answer: "Yes! Musifly offers a robust free version with all essential features. We also offer a Premium tier for ad-free listening and exclusive themes.",
+    question: "Why was Mussifly rebranded to Muzifly?",
+    answer: "Mussifly has officially and professionally rebranded to Muzifly! This update gives the app a sleeker, more modern identity while keeping everything you love identical: unlimited streaming, lossless audio, seamless cloud sync, and an ad-free music experience with no data loss.",
   },
   {
-    question: "Who is the developer of Mussifly?",
-    answer: "The developer of Mussifly is Sahitya Kanojiya. He is the founder, creator, and lead developer of the Mussifly music app. You can follow his official projects and source code on GitHub at https://github.com/skhub-tech.",
+    question: "Is Muzifly free to use?",
+    answer: "Yes! Muzifly offers a robust free version with all essential features. We also offer a Premium tier for ad-free listening and exclusive themes.",
+  },
+  {
+    question: "Who is the developer of Muzifly (formerly Mussifly)?",
+    answer: "The developer of Muzifly (formerly Mussifly) is Sahitya Kanojiya. He is the founder, creator, and lead developer of the Muzifly music app. You can follow his official projects and source code on GitHub at https://github.com/skhub-tech.",
   },
   {
     question: "Does it support offline playback?",
@@ -24,7 +28,7 @@ const faqs = [
   },
   {
     question: "Which audio formats are supported?",
-    answer: "Musifly supports all major audio formats including MP3, FLAC, WAV, AAC, and OGG, ensuring high-fidelity playback for all your files.",
+    answer: "Muzifly supports all major audio formats including MP3, FLAC, WAV, AAC, and OGG, ensuring high-fidelity playback for all your files.",
   },
   {
     question: "How does the Cloud Sync work?",

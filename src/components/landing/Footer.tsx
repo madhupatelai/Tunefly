@@ -54,7 +54,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            Â© 2025 {strings.app.name}. All rights reserved.
+            © 2026 {strings.app.name}. All rights reserved.
           </p>
           <div className="flex gap-4">
             <a href={strings.social.instagram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-white transition-colors"><Instagram className="w-5 h-5" /></a>

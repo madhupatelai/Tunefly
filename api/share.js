@@ -5,10 +5,10 @@ export default async function handler(req, res) {
     return res.redirect(302, '/');
   }
 
-  let title = 'Listen on Mussifly';
-  let artist = 'Mussifly';
+  let title = 'Listen on Muzifly';
+  let artist = 'Muzifly';
   let image = 'https://mussifly.vercel.app/logo.png';
-  let description = 'Experience high-fidelity music streaming, AI bass boost, and ad-free playback on Mussifly.';
+  let description = 'Experience high-fidelity music streaming, AI bass boost, and ad-free playback on Muzifly (formerly Mussifly).';
   let isYouTube = false;
   let videoId = id;
 
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
               if (songObj.image) {
                 image = songObj.image.replace('150x150', '500x500');
               }
-              description = `Listen to "${title}" by ${artist} on Mussifly.`;
+              description = `Listen to "${title}" by ${artist} on Muzifly (formerly Mussifly).`;
             }
           }
         } catch (e) {
@@ -56,7 +56,7 @@ export default async function handler(req, res) {
             if (ytData.title) {
               title = ytData.title;
               artist = ytData.author_name || 'YouTube Music';
-              description = `Listen to "${title}" on Mussifly. Free HD music player for Android.`;
+              description = `Listen to "${title}" on Muzifly (formerly Mussifly). Free HD music player for Android.`;
             }
           }
         } catch (e) {
@@ -64,18 +64,18 @@ export default async function handler(req, res) {
         }
       }
     } else if (type === 'artist') {
-      title = `${id} | Mussifly`;
-      artist = 'Artist on Mussifly';
-      description = `Discover and stream music by ${id} on Mussifly.`;
+      title = `${id} | Muzifly`;
+      artist = 'Artist on Muzifly';
+      description = `Discover and stream music by ${id} on Muzifly (formerly Mussifly).`;
     } else if (type === 'album') {
-      title = `Album | Mussifly`;
-      description = `Listen to full album on Mussifly.`;
+      title = `Album | Muzifly`;
+      description = `Listen to full album on Muzifly (formerly Mussifly).`;
     } else if (type === 'playlist' || type === 'online_playlist') {
-      title = `Playlist | Mussifly`;
-      description = `Enjoy curated playlists on Mussifly.`;
+      title = `Playlist | Muzifly`;
+      description = `Enjoy curated playlists on Muzifly (formerly Mussifly).`;
     } else if (type === 'profile') {
-      title = `User Profile | Mussifly`;
-      description = `Check out music profile on Mussifly.`;
+      title = `User Profile | Muzifly`;
+      description = `Check out music profile on Muzifly (formerly Mussifly).`;
     }
   } catch (err) {
     console.error('Share handler error:', err);
@@ -106,13 +106,13 @@ export default async function handler(req, res) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>${safeTitle} - ${safeArtist} | Mussifly</title>
+  <title>${safeTitle} - ${safeArtist} | Muzifly</title>
   <meta name="description" content="${safeDesc}">
   <link rel="icon" type="image/png" href="/favicon.png">
 
   <!-- Open Graph / WhatsApp / Facebook / Telegram / Instagram -->
   <meta property="og:type" content="music.song">
-  <meta property="og:site_name" content="Mussifly">
+  <meta property="og:site_name" content="Muzifly">
   <meta property="og:url" content="${safeUrl}">
   <meta property="og:title" content="${safeTitle}">
   <meta property="og:description" content="${safeDesc}">
@@ -125,13 +125,13 @@ export default async function handler(req, res) {
   <!-- Twitter Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@mussifly">
-  <meta name="twitter:title" content="${safeTitle} - ${safeArtist}">
+  <meta name="twitter:title" content="${safeTitle} - ${safeArtist} | Muzifly">
   <meta name="twitter:description" content="${safeDesc}">
   <meta name="twitter:image" content="${safeImage}">
 
   <!-- App Linking -->
   <meta property="al:android:url" content="${customSchemeUrl}">
-  <meta property="al:android:app_name" content="Mussifly">
+  <meta property="al:android:app_name" content="Muzifly">
   <meta property="al:android:package" content="com.musifly.android">
 
   <style>
@@ -288,7 +288,7 @@ export default async function handler(req, res) {
   <div class="card-container">
     <div class="logo-badge">
       <span>🎵</span>
-      <span>MUSSIFLY</span>
+      <span>MUZIFLY</span>
     </div>
 
     <div class="art-wrapper">
@@ -301,12 +301,12 @@ export default async function handler(req, res) {
     <div class="btn-group">
       <a href="${androidIntentUrl}" class="btn btn-primary" id="openAppBtn">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        Play in Mussifly App
+        Play in Muzifly App
       </a>
 
       <a href="${apkDownloadUrl}" class="btn btn-secondary" target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download Mussifly APK
+        Download Muzifly APK
       </a>
     </div>
 
