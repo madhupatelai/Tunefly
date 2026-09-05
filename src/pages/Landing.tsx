@@ -6,8 +6,6 @@ import { Hero } from "@/components/landing/Hero";
 import { Screenshots } from "@/components/landing/Screenshots";
 import { Navbar } from "@/components/landing/Navbar";
 import { Developer } from "@/components/landing/Developer";
-import { AdBlockDetector } from "@/components/landing/AdBlockDetector";
-
 export default function Landing() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary selection:text-white">
@@ -21,7 +19,6 @@ export default function Landing() {
         <FAQ />
       </div>
       <Footer />
-      <AdBlockDetector />
     </div>
   );
 }
