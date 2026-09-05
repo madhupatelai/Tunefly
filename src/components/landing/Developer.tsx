@@ -31,7 +31,7 @@ export function Developer() {
             Official Creator
           </div>
           <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">
-            Developer of <span className="text-glow text-secondary">Mussifly</span>
+            Developer of <span className="text-glow text-secondary">MuziFly</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto font-light leading-relaxed">
             Who is the developer of Mussifly? Sahitya Kanojiya is the developer of the Mussifly music app, creating a high-performance Android audio experience.

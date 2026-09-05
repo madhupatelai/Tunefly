@@ -11,12 +11,12 @@ import strings from "@/config/strings.json";
 
 const faqs = [
   {
-    question: "Why was Mussifly rebranded to Muzifly?",
-    answer: "Mussifly has officially and professionally rebranded to Muzifly! This update gives the app a sleeker, more modern identity while keeping everything you love identical: unlimited streaming, lossless audio, seamless cloud sync, and an ad-free music experience with no data loss.",
+    question: "Why was Mussifly rebranded to MuziFly?",
+    answer: "Mussifly has officially and professionally rebranded to MuziFly! This update gives the app a sleeker, more modern identity while keeping everything you love identical: unlimited streaming, lossless audio, seamless cloud sync, and an ad-free music experience with no data loss.",
   },
   {
-    question: "Is Muzifly free to use?",
-    answer: "Yes! Muzifly offers a robust free version with all essential features. We also offer a Premium tier for ad-free listening and exclusive themes.",
+    question: "Is MuziFly free to use?",
+    answer: "Yes! MuziFly offers a robust free version with all essential features. We also offer a Premium tier for ad-free listening and exclusive themes.",
   },
   {
     question: "Who is the developer of Muzifly (formerly Mussifly)?",
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     question: "Which audio formats are supported?",
-    answer: "Muzifly supports all major audio formats including MP3, FLAC, WAV, AAC, and OGG, ensuring high-fidelity playback for all your files.",
+    answer: "MuziFly supports all major audio formats including MP3, FLAC, WAV, AAC, and OGG, ensuring high-fidelity playback for all your files.",
   },
   {
     question: "How does the Cloud Sync work?",

@@ -22,10 +22,10 @@ export default function DeleteAccount() {
                 >
                     <header className="space-y-4 border-b border-white/10 pb-8 text-center md:text-left">
                         <h1 className="text-4xl md:text-6xl font-black tracking-tighter text-white bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
-                            Mussifly Account Deletion
+                            MuziFly Account Deletion
                         </h1>
                         <p className="text-muted-foreground text-lg italic">
-                            How to remove your data from Mussifly
+                            How to remove your data from MuziFly
                         </p>
                     </header>
 
@@ -36,7 +36,7 @@ export default function DeleteAccount() {
                                 Deleting via the App
                             </h2>
                             <p>
-                                Users can delete their account directly inside the Mussifly app by navigating to:
+                                Users can delete their account directly inside the MuziFly app by navigating to:
                             </p>
                             <div className="bg-white/10 p-4 rounded-xl inline-block font-mono text-primary font-bold">
                                 Settings → Delete Account
@@ -71,7 +71,7 @@ export default function DeleteAccount() {
                                 </a>
                             </div>
                             <p className="text-sm">
-                                Please ensure you send the email from the address associated with your Mussifly account to verify ownership.
+                                Please ensure you send the email from the address associated with your MuziFly account to verify ownership.
                             </p>
                         </div>
 
